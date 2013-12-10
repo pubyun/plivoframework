@@ -111,10 +111,10 @@ class OutboundServer(StreamServer):
         self._filter = filter
         #Define the Class that will handle process when receiving message
         self._requestClass = handle_class
-        StreamServer.__init__(self, address, self.do_handle, 
+        StreamServer.__init__(self, address, self.handler, 
                         backlog=BACKLOG, spawn=gevent.spawn_raw)
 
-    def do_handle(self, socket, address):
+    def handler(self, socket, address):
         try:
             self.handle_request(socket, address)
         finally:
